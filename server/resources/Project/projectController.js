@@ -16,7 +16,7 @@ class ProjectController {
       .catch(next);
 
     function end(doc) {
-      sendSuccess(201, doc);
+      sendSuccess(res, 201, doc);
     }
   }
 
@@ -26,7 +26,7 @@ class ProjectController {
       .catch(next);
 
     function end(docs) {
-      sendSuccess(200, docs);
+      sendSuccess(res, 200, docs);
     }
   }
 }
