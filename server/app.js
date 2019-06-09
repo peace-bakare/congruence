@@ -3,7 +3,10 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
-// app.use("/api/v1/projects", PROJECT)
+
+const Employee = require("./resources/Employee");
+
+app.use("/api/v1/employees", Employee);
 
 app.listen(PORT, () => {
 	console.log("Application listening at port " + PORT);
