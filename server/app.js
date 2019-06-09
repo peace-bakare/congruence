@@ -5,8 +5,10 @@ const PORT = process.env.PORT || 8080;
 
 
 const Employee = require("./resources/Employee");
+const Project = require("./resources/Project");
 
 app.use("/api/v1/employees", Employee);
+app.use("/api/v1/projects", Projects);
 
 //Connect to mongodb
 mongoose.connect("mongodb://localhost/congruence", { useNewUrlParser: true })
