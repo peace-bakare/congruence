@@ -1,7 +1,7 @@
 const uuidv1 = require('uuid/v1');
 const Project = require('./projectModel');
 
-const { sendError, sendResponse } = require('../../lib/responseHandler');
+const { sendError, sendSuccess } = require('../../lib/responseHandler');
 
 class ProjectController {
   static createProject(req, res, next) {
@@ -16,7 +16,7 @@ class ProjectController {
       .catch(next);
 
     function end(doc) {
-      sendResponse(201, doc);
+      sendSuccess(201, doc);
     }
   }
 
@@ -26,7 +26,7 @@ class ProjectController {
       .catch(next);
 
     function end(docs) {
-      sendResponse(200, docs);
+      sendSuccess(200, docs);
     }
   }
 }
