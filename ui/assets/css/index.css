@@ -1,0 +1,253 @@
+:root{
+    --green: #4bbf6c;
+}
+button{
+    cursor: pointer;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.top{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 1;
+}
+
+nav{
+    display: flex;
+    padding: 0 100px;
+    justify-content: space-between;
+    height: 90px;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0))
+    /* background-color: rgba(0, 0, 0, 0.1);    */
+}
+
+.logo{
+    font-size: 23px;
+    letter-spacing: 0.04rem;
+    font-weight: 600;
+    color: white;
+}
+
+nav button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--green);
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    padding: 5px;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav button:last-child{
+    background-color: transparent;
+    /* color: var(--green); */
+    color: #7bdd97;
+    border: 1px solid #4BBF6B;
+    margin-left: 5px;
+    transition: 300ms;
+}
+
+nav button:last-child:hover{
+    background-color: var(--green);
+    color: white;
+
+}
+
+.top-content{
+    padding: 62px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100% - 90px);
+    box-sizing: border-box;
+}
+
+
+.large-text{
+    font-size: 38px;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px 0 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.large-text .green{
+    color: var(--green);
+}
+
+.small-text{
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    width: 90%;
+    line-height: 1.35rem;
+    letter-spacing: 0.05rem;
+    /* color: #333; */
+    color: white;
+    text-align: justify
+}
+
+.under-img{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background-image: url('../images/background-1.jpg');
+    background-position: center;
+    background-size: cover;
+    /* background-color: rgba(0, 0, 0, 0.8) */
+}
+
+.learn-more{
+    display: flex;
+    margin: auto;
+    width: 230px;
+    height: 45px;
+    align-items: center;
+    font-family: 'Lato';
+    font-size: 18px;
+    margin-top: 80px;
+    background-color: var(--green);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    justify-content: center;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.learn-more img{
+    height: 25px;
+    margin-right: 8px;
+    margin-top: 1px;
+}
+
+.get-started{
+    height: 40px;
+    display: flex;
+    padding: 0 25px 0 10px;
+    justify-content: space-between;
+    width: 170px;
+    color: white;
+    background-color: var(--green);
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    outline: none;
+}
+
+.forms{
+    padding-left: 100px;
+    position: relative;
+}
+
+form{
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    transition: height 300ms;
+    margin: auto;
+}
+
+form *{
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: 300ms;
+}
+
+form.active{
+    width: 350px;
+    height: 370px;
+    padding: 10px 10px 15px;
+    position: absolute;
+}
+
+form.show *{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+form input{
+    width: 100%;
+    border-radius: 5px;
+    height: 30px;
+    border: 2px solid rgba(128, 128, 128, 0.3);
+    outline: none;
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+
+form.login.active{
+    height: 250px;
+}
+
+form.signup-hirer.active{
+    height: 300px;
+}
+
+form.login .form-group{
+    margin-bottom: 15px;
+}
+
+form .form-group{
+    margin-bottom: 10px;
+}
+
+form .form-group.inline{
+    width: 49%;
+    display: inline-block;
+}
+
+form .form-header{
+    font-family: 'Poppins',sans-serif;
+    font-size: 22px;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 7px
+}
+
+form button{
+    width: 100px;
+    height: 30px;
+    background-color: var(--green);
+    border-radius: 5px;
+    border: none;
+    font-family: 'Poppins',sans-serif;
+    color: white;
+}
+
+form button.form-login,form button.form-toggle{
+    color: #4285f4;
+    background-color: transparent;
+    min-width: 60px
+}
+
+form button.form-login:hover,form button.form-toggle:hover{
+    text-decoration: underline;
+}
+
+form button.form-toggle{
+    display: block;
+    width: auto;
+    margin-top: 10px;
+}
+
+.toggle{
+    outline: none;
+}
