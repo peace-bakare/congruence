@@ -10,6 +10,6 @@ exports.createError = function createError(status, code, errors) {
   const error = new Error();
   error.code = code;
   error.status = status;
-  error.errors = errors;
+  error.errors = typeof errors == 'string' ? [errors] : errors;
   return error;
 };

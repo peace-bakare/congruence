@@ -1,12 +1,10 @@
 const express = require('express');
 
 const projectController = require('./projectController');
+const validateToken = require('../../middlewares/validateToken');
 
 const projectRouter = express.Router();
 module.exports = projectRouter;
 
-projectRouter.route('/')
-  .get(projectController.getAllProjects)
-  .post(projectController.createProject);
-
-projectRouter.delete('/:projectId', projectController.deleteProject);
+projectRouter.post('/', validateToken, projectController.createProject);
+projectRouter.delete('/:projectId', validateToken, projectController.deleteProject);
