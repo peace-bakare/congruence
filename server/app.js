@@ -9,7 +9,7 @@ const Employee = require("./resources/Employee");
 const Project = require("./resources/Project");
 
 app.use("/api/v1/employees", Employee);
-app.use("/api/v1/projects", Projects);
+app.use("/api/v1/projects", Project);
 
 //Connect to mongodb
 mongoose.connect("mongodb+srv://Wisdom:DShX5RERA6OTTG0O@cluster0-zh4ss.mongodb.net/congruence?retryWrites=true", {
