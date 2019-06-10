@@ -5,18 +5,19 @@ const { createValidator } = require("../../lib/validator");
 
 // create validators
 const createProjectValidator = createValidator("title.string, description.string");
+const deleteProjectValidator = createValidator("projectID.string");
 
 class ProjectController {
   static createProject(req, res, next) {
     const projectDTO = req.body;
 
     createProjectValidator(projectDTO)
-      .catch(throwError)
+      .catch(throwBadRequestError)
       .then(fns.createProject)
       .then(end)
       .catch(next);
 
-      function throwError(error) {
+      function throwBadRequestError(error) {
         throw createError(400, 'BAD_REQUEST', error.errors);
       }
 
@@ -32,6 +33,24 @@ class ProjectController {
 
     function end(docs) {
       sendSuccess(res, 200, docs);
+    }
+  }
+
+  static deleteProject(req, res, next) {
+    const projectDTO = req.params;
+
+    deleteProjectValidator(projectDTO)
+      .catch(throwBadRequestError)
+      .then(fns.deleteProject(projectDTO.projectID))
+      .then(end)
+      .catch(next);
+
+    function throwBadRequestError(error) {
+      throw createError(400, 'BAD_REQUEST', error.errors);
+    }
+
+    function end(doc) {
+      sendSuccess(res, 201, doc);
     }
   }
 }

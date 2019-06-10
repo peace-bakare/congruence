@@ -5,6 +5,7 @@ const Project = require('./projectModel');
 exports.createProject = function createProject(projectDTO) {
   const project = new Project(projectDTO);
   project.ref = uuidv1();
+
   return project.save();
 };
 
@@ -12,6 +13,6 @@ exports.getAllProjects = function getAllProjects() {
   return Project.fetchAll();
 };
 
-exports.deleteProject = function deleteProject(projectID) {
-  return Project.remove({ })
+exports.deleteProject = function deleteProject(ref) {
+  return Project.remove({ ref: ref });
 };
