@@ -5,7 +5,8 @@ const employeeSchema = mongoose.Schema({
 	lastname: { type: String, required: true },
 	nickname: { type: String, required: true },
 	email: { type: String, required: true },
-	password: { type: String, required: true }
+	password: { type: String, required: true },
+	craft: { type: String, required: true }
 	//TODO Add projects
 });
 
