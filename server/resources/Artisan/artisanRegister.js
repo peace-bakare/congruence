@@ -1,40 +1,40 @@
-const Employee = require("./employeeModel")
+const Artisan = require("./artisanModel")
 const { hash } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
 
-const registerEmployeeValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string, craft.string")
+const registerArtisanValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string, craft.string")
 
-function registerEmployeeFn({ firstname, lastname, nickname, email, password, craft }){
+function registerArtisanFn({ firstname, lastname, nickname, email, password, craft }){
 
 	return checkIfEmailExists()
 			.then(checkIfNicknameExists)
 			.then(() => hash(password, 11))
-			.then(createEmployee)
-			.then(saveEmployee)
+			.then(createArtisan)
+			.then(saveArtisan)
 
 	function checkIfNicknameExists(){
-		return Employee.findOne({ nickname: nickname })
+		return Artisan.findOne({ nickname: nickname })
 				.then(handleExists)
 
-		function handleExists(employee){
-			if(employee)
+		function handleExists(artisan){
+			if(artisan)
 				throw createError(403, "NICK_NAME_EXISTS")
 		}
 	}
 
 	function checkIfEmailExists(){
-		return Employee.findOne({ email: email })
+		return Artisan.findOne({ email: email })
 				.then(handleExists)
 
-		function handleExists(employee){
-			if(employee)
+		function handleExists(artisan){
+			if(artisan)
 				throw createError(403, "EMAIL_EXISTS")
 		}
 	}
 
-	function createEmployee(hashedPassword){
-		const newEmployee = new Employee({
+	function createArtisan(hashedPassword){
+		const newArtisan = new Artisan({
 			firstname: firstname,
 			lastname: lastname,
 			nickname: nickname,
@@ -43,19 +43,19 @@ function registerEmployeeFn({ firstname, lastname, nickname, email, password, cr
 			craft: craft
 		})
 
-		return newEmployee
+		return newArtisan
 	}
 
-	function saveEmployee(employee){
-		return employee.save()
+	function saveArtisan(artisan){
+		return artisan.save()
 	}
 
 }
 
-function registerEmployeeRoute(req, res, next){
-	registerEmployeeValidator(req.body)
+function registerArtisanRoute(req, res, next){
+	registerArtisanValidator(req.body)
 		.catch(sendBadRequestError)
-		.then(() => registerEmployeeFn(req.body))
+		.then(() => registerArtisanFn(req.body))
 		.then(createSuccessResponse)
 		.then(sendSuccessResponse)
 		.catch(next)
@@ -66,7 +66,7 @@ function registerEmployeeRoute(req, res, next){
 
 	function createSuccessResponse(){
 		return {
-			message: "Employee registered successfully"
+			message: "Artisan registered successfully"
 		}
 	}
 
@@ -76,6 +76,6 @@ function registerEmployeeRoute(req, res, next){
 }
 
 module.exports = {
-	fn: registerEmployeeFn,
-	route: registerEmployeeRoute
+	fn: registerArtisanFn,
+	route: registerArtisanRoute
 }

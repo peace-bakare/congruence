@@ -1,13 +1,13 @@
-const Employee = require("./employeeModel")
+const Employee = require("./artisanModel")
 const jwt = require("jsonwebtoken")
 const { SECRET_KEY } = require("../../config")
 const { compare } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
 
-const loginEmployeeValidator = createValidator("email.string, password.string")
+const loginArtisanValidator = createValidator("email.string, password.string")
 
-function loginEmployeeFn({ email, password }){
+function loginArtisanFn({ email, password }){
 
 	return checkIfEmailExists()
 			.then(checkForCorrectPassword)
@@ -41,10 +41,10 @@ function loginEmployeeFn({ email, password }){
 
 } 
 
-function loginEmployeeRoute(req, res, next){
+function loginArtisanRoute(req, res, next){
 	loginEmployeeValidator(req.body)
 		.catch(sendBadRequestError)
-		.then(() => loginEmployeeFn(req.body))
+		.then(() => loginArtisanFn(req.body))
 		.then(createSuccessResponse)
 		.then(sendSuccessResponse)
 		.catch(next)
@@ -56,7 +56,7 @@ function loginEmployeeRoute(req, res, next){
 
 	function createSuccessResponse(token){
 		return {
-			message: "Employee logged in successfully",
+			message: "Artisan logged in successfully",
 			token: token
 		}
 	}
@@ -67,6 +67,6 @@ function loginEmployeeRoute(req, res, next){
 }
 
 module.exports = {
-	fn: loginEmployeeFn,
-	route: loginEmployeeRoute
+	fn: loginArtisanFn,
+	route: loginArtisanRoute
 }
