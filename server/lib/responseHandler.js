@@ -16,4 +16,3 @@ exports.sendError = function sendError(res, status, error) {
       error: error
     });
 };
-
