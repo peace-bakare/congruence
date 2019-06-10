@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const { sendError } = require('./lib/responseHandler');
  
@@ -7,6 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+app.use(cors());
 
 const Employee = require("./resources/Employee");
 const Project = require("./resources/Project");
