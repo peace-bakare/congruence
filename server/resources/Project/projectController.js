@@ -49,8 +49,8 @@ class ProjectController {
       throw createError(400, 'BAD_REQUEST', error.errors);
     }
 
-    function end(doc) {
-      sendSuccess(res, 201, doc);
+    function end() {
+      sendSuccess(res, 200);
     }
   }
 }

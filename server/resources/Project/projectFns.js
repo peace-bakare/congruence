@@ -15,5 +15,5 @@ exports.getAllProjects = function getAllProjects() {
 };
 
 exports.deleteProject = function deleteProject(ref) {
-  return Project.remove({ ref: ref });
+  return Project.deleteOne({ ref: ref });
 };

@@ -2,7 +2,7 @@ exports.sendSuccess = function sendSuccess(res, status, data) {
   res.status(status)
     .json({
       status: status,
-      data: data
+      data: data || null
     });
 };
 
