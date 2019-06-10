@@ -1,5 +1,4 @@
-const uuidv1 = require('uuid/v1');
-const Project = require('./projectModel');
+const fns = require('./projectFns');
 
 const { createError, sendSuccess } = require('../../lib/responseHandler');
 const { createValidator } = require("../../lib/validator");
@@ -13,25 +12,9 @@ class ProjectController {
 
     createProjectValidator(projectDTO)
       .catch(throwError)
-      .then(createNewProject)
-      .then(appendRef)
-      .then(saveProject)
+      .then(fns.createProject)
       .then(end)
       .catch(next);
-
-      function createNewProject() {
-        const project = new Project(projectDTO);
-        return project;
-      }
-
-      function appendRef(project) {
-        project.ref = uuidv1();
-        return project;
-      }
-
-      function saveProject(project) {
-        return project.save()
-      }
 
       function throwError(error) {
         throw createError(400, 'BAD_REQUEST', error.errors);
@@ -43,7 +26,7 @@ class ProjectController {
   }
 
   static getAllProjects(req, res, next) {
-    Project.fetchAll()
+    fns.getAllProjects()
       .then(end)
       .catch(next);
 
