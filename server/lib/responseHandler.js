@@ -1,6 +1,6 @@
 exports.sendSuccess = function sendSuccess(res, status, data) {
   res.status(status)
-    .data({
+    .json({
       status: status,
       data: data
     });
@@ -11,7 +11,7 @@ exports.sendError = function sendError(res, status, error) {
     error = new Error(error);
   
   res.status(status)
-    .data({
+    .json({
       status: status,
       error: error
     });
