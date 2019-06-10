@@ -9,4 +9,4 @@ projectRouter.route('/')
   .get(projectController.getAllProjects)
   .post(projectController.createProject);
 
-projectRouter.delete('/:projectID', projectController.deleteProject);
+projectRouter.delete('/:projectId', projectController.deleteProject);
