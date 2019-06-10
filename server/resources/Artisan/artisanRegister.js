@@ -1,3 +1,4 @@
+const uuidv1 = require("uuid/v1")
 const Artisan = require("./artisanModel")
 const { hash } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
@@ -35,12 +36,14 @@ function registerArtisanFn({ firstname, lastname, nickname, email, password, cra
 
 	function createArtisan(hashedPassword){
 		const newArtisan = new Artisan({
+			ref: uuidv1().split("-").shift(),
 			firstname: firstname,
 			lastname: lastname,
 			nickname: nickname,
 			email: email,
 			password: hashedPassword,
-			craft: craft
+			craft: craft,
+			projects: []
 		})
 
 		return newArtisan

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-
 const artisanSchema = mongoose.Schema({
+	ref: { type: String },
 	firstname: { type: String, required: true },
 	lastname: { type: String, required: true },
 	nickname: { type: String, required: true },
