@@ -1,6 +1,6 @@
 const Employee = require("./employeeModel")
 const { createValidator } = require("../../lib/validator")
-const { sendError, sendSuccess } = require("../../lib/responseHandler")
+const { createError, sendSuccess } = require("../../lib/responseHandler")
 
 const registerEmployeeValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string")
 
@@ -15,15 +15,16 @@ function registerEmployeeFn({ firstname, lastname, nickname, email, password }){
 	return newEmployee.save()
 }
 
-function registerEmployeeRoute(req, res){
+function registerEmployeeRoute(req, res, next){
 	registerEmployeeValidator(req.body)
 		.catch(sendBadRequestError)
 		.then(() => registerEmployeeFn(req.body))
 		.then(createSuccessResponse)
 		.then(sendSuccessResponse)
+		.catch(next)
 
 	function sendBadRequestError(errors){
-		sendError(res, 400, errors.errors)
+		throw createError(400, "BAD_REQUEST_BODY", errors.errors)
 	}
 
 	function createSuccessResponse(){
