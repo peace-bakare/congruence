@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const artisanSchema = mongoose.Schema({
 	firstname: { type: String, required: true },
 	lastname: { type: String, required: true },
@@ -7,7 +8,7 @@ const artisanSchema = mongoose.Schema({
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	craft: { type: String, required: true },
-	// projects: [{ type}]
+	projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }]
 	//TODO Add projects
 });
 
