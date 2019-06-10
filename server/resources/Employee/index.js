@@ -1,8 +1,8 @@
 const express = require("express")
 const employeeRouter = express.Router()
 
-employeeRouter.get("/", (req, res) => {
-	res.send("Hello and welcome")
-})
+const registerEmployee = require("./employeeRegister")
+
+employeeRouter.post("/", registerEmployee.route)
 
 module.exports = employeeRouter

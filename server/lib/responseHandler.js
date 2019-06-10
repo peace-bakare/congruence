@@ -7,13 +7,17 @@ exports.sendSuccess = function sendSuccess(res, status, data) {
 };
 
 exports.sendError = function sendError(res, status, error) {
-  if (!(error instanceof Error))
-    error = new Error(error);
-  
-  res.status(status)
-    .json({
-      status: status,
-      error: error
-    });
+  if(typeof errors == "string")
+    res.status(status)
+      .json({
+        status: status,
+        error: error
+      });
+  else
+    res.status(status)
+      .json({
+        status: status,
+        errors: error
+      })
 };
 
