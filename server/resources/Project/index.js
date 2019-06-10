@@ -6,5 +6,7 @@ const projectRouter = express.Router();
 module.exports = projectRouter;
 
 projectRouter.route('/')
-  .post(projectController.createProject)
-  .get(projectController.getAllProjects);
+  .get(projectController.getAllProjects)
+  .post(projectController.createProject);
+
+projectRouter.delete('/:projectId', projectController.deleteProject);
