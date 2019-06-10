@@ -6,17 +6,10 @@ exports.sendSuccess = function sendSuccess(res, status, data) {
     });
 };
 
-exports.sendError = function sendError(res, status, error) {
-  if(typeof errors == "string")
-    res.status(status)
-      .json({
-        status: status,
-        error: error
-      });
-  else
-    res.status(status)
-      .json({
-        status: status,
-        errors: error
-      })
+exports.createError = function createError(status, code, errors) {
+  const error = new Error();
+  error.code = code;
+  error.status = status;
+  error.errors = errors;
+  return error;
 };

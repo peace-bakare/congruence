@@ -26,7 +26,16 @@ mongoose.connect("mongodb+srv://Wisdom:DShX5RERA6OTTG0O@cluster0-zh4ss.mongodb.n
 .catch(err => { console.log("Error connection to online db" , err)});
 
 app.use((error, req, res, next) => {
-  sendError(res, error.status || 500, error);
+  let code = error.code || 'SERVER_ERROR',
+    status = error.status || 500,
+    errors = error.errors || [];
+
+  res.status(status)
+    .json({
+      status: status,
+      code: code,
+      errors: errors
+    });
 });
 
 
