@@ -24,7 +24,7 @@
 // })
 
 document.querySelector('.get-started').addEventListener('click', () => {
-    if(document.querySelector('form.active')){
+    if(document.querySelector('form.active:not(.signup-artisan)')){
         document.querySelector('form.active').classList.remove('active')
         setTimeout(() => {
             document.querySelector('.signup-artisan').classList.add('active')
@@ -38,4 +38,16 @@ document.querySelector('.get-started').addEventListener('click', () => {
             document.querySelector('.signup-artisan').classList.add('show')
         },200)
     }
+})
+
+document.querySelectorAll('.toggle').forEach(e => {
+    e.addEventListener('click', () => {
+        if(document.querySelector('form.active')){
+            document.querySelector('form.active').classList.remove('active')
+        }
+        document.querySelector(`.${e.dataset.target}`).classList.add('active')
+        setTimeout(() => {
+            document.querySelector(`.${e.dataset.target}`).classList.add('show')
+        },500)
+    })
 })
