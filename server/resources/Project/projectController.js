@@ -6,7 +6,6 @@ const { createError, sendSuccess } = require('../../lib/responseHandler');
 const { createValidator } = require("../../lib/validator");
 
 // create validators
-const createProjectValidator = createValidator("title.string, description.string");
 const deleteProjectValidator = createValidator("projectId.string");
 
 class ProjectController {

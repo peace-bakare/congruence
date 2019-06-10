@@ -1,4 +1,4 @@
-const Employee = require("./artisanModel")
+const Artisan = require("./artisanModel")
 const jwt = require("jsonwebtoken")
 const { SECRET_KEY } = require("../../config")
 const { compare } = require("bcrypt")
@@ -14,35 +14,35 @@ function loginArtisanFn({ email, password }){
 			.then(generateToken)
 
 	function checkIfEmailExists(){
-		return Employee.findOne({ email: email })
+		return Artisan.findOne({ email: email })
 				.then(handleExists)
 
-		function handleExists(employee){
-			if(!employee)
+		function handleExists(artisan){
+			if(!artisan)
 				throw createError(403, "INVALID_USERNAME_PASSWORD")
-			return employee
+			return artisan
 		}
 	}
 
-	function checkForCorrectPassword(employee){
-		return compare(password, employee.password)
+	function checkForCorrectPassword(artisan){
+		return compare(password, artisan.password)
 					.then(handleCompare)
 
 		function handleCompare(same){
 			if(!same)
 				throw createError(403, "INVALID_USERNAME_PASSWORD")
-			return employee
+			return artisan
 		}
 	}
 
-	function generateToken(employee){
-		return jwt.sign({ email: employee.email }, SECRET_KEY, { expiresIn: "7d" })
+	function generateToken(artisan){
+		return jwt.sign({ email: artisan.email }, SECRET_KEY, { expiresIn: "7d" })
 	}
 
 } 
 
 function loginArtisanRoute(req, res, next){
-	loginEmployeeValidator(req.body)
+	loginArtisanValidator(req.body)
 		.catch(sendBadRequestError)
 		.then(() => loginArtisanFn(req.body))
 		.then(createSuccessResponse)

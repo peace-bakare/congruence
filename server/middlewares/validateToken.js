@@ -1,10 +1,11 @@
 //Validates the user token
 const { createError } = require("../lib/responseHandler")
 const { SECRET_KEY } = require("../config")
+const { promisify } = require("util");
 
 //Add promise functionality to token validator
 let { verify } = require("jsonwebtoken")
-verify = promisify(verify)
+verify = promisify(verify);
 
 let validateToken = (req, res, next) => {
 

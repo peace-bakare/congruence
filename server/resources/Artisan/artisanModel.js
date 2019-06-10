@@ -9,7 +9,6 @@ const artisanSchema = mongoose.Schema({
 	password: { type: String, required: true },
 	craft: { type: String, required: true },
 	projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }]
-	//TODO Add projects
 });
 
 const artisanModel = mongoose.model("Artisan", artisanSchema);
