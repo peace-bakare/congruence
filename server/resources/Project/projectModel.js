@@ -10,8 +10,4 @@ const projectSchema = new mongoose.Schema({
   media: [{ type: ObjectId, ref: 'Media' }]
 });
 
-projectSchema.statics.fetchAll = function fetchAllProjects(query) {
-  return this.find(query || {}).exec();
-};
-
 module.exports = mongoose.model('Project', projectSchema);
