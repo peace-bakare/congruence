@@ -1,7 +1,7 @@
 const uuidv1 = require('uuid/v1');
 const Project = require('./projectModel');
 
-const { sendError, sendSuccess } = require('../../lib/responseHandler');
+const { sendSuccess } = require('../../lib/responseHandler');
 
 class ProjectController {
   static createProject(req, res, next) {
