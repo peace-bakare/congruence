@@ -1,9 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+
+app.use(bodyParser.json());
 
 const Employee = require("./resources/Employee");
 const Project = require("./resources/Project");
