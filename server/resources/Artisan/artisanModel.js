@@ -12,6 +12,6 @@ const artisanSchema = mongoose.Schema({
 	//TODO Add projects
 });
 
-const artisanModel = mongoose.model("Employee", artisanSchema);
+const artisanModel = mongoose.model("Artisan", artisanSchema);
 
 module.exports = artisanModel;
