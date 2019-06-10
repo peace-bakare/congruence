@@ -22,7 +22,13 @@ function loginEmployeeFn({ email, password }){
 	}
 
 	function checkForCorrectPassword(employee){
-		return compare()
+		return compare(password, employee.password)
+					.then(handleCompare)
+
+		function handleCompare(same){
+			if(!same)
+				throw createError(403, "INVALID_USERNAME_PASSWORD")
+		}
 	}
 
 } 
