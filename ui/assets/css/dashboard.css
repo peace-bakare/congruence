@@ -1,0 +1,247 @@
+body{
+    padding: 0;
+    margin: 0;
+    background: rgb(230, 236, 240);
+}
+
+button{
+    cursor: pointer;
+}
+
+nav{
+    display: flex;
+    padding: 0 100px;
+    height: 60px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+.logo{
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    margin: auto 0;
+    font-size: 23px;
+    letter-spacing: 0.04rem;
+    font-weight: 600;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+}
+
+.buttons button{
+    background-color: transparent;
+    border: none;
+    height: 35px;
+    display: flex;
+    position: relative;
+    width: 40px;
+    margin-right: 5px;
+}
+
+.buttons img{
+    height: 25px;
+    transition: 300ms;
+    opacity: 1;
+    position: absolute;
+    top: 5px;
+}
+
+.buttons button:hover img{
+    opacity: 0;
+}
+
+.buttons button:hover img.hide{
+    opacity: 1;
+}
+
+.buttons img.hide{
+    opacity: 0;
+}
+
+.buttons .logout{
+    width: 70px;
+    border: 1px solid #4BBF6B;
+    border-radius: 5px;
+    font-family: 'Montserrat',sans-serif;
+    justify-content: center;
+    height: 30px;
+    color: #4BBF6B;
+    margin-left: 3px;
+    transition: 300ms;
+}
+
+.buttons .logout:hover{
+    color: white;
+    background-color: #4BBF6B;
+}
+
+.top{
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.top img.background{
+    width: 100%;
+}
+
+.content{
+    margin: 70px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+     /* 1fr; */
+    grid-column-gap: 100px;
+    padding: 0 40px;
+}
+
+.content-details{
+    display: grid;
+    font-family: 'Montserrat',sans-serif;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.content-details .number{
+    font-weight: 700;
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+.sidebar{
+    background-color: white;
+    font-family: 'Lato',sans-serif;
+    padding: 20px 10px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 15px;
+}
+
+.sidebar img.avatar{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #4BBF6B;
+}
+
+.user-name{
+    font-weight: 700;
+}
+
+.user-name,.skills{
+    font-size: 18px;
+}
+
+.skills{
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.sidebar .num{
+    /* font-size: 18px; */
+    color: rgba(0, 0, 0, 0.9)
+}
+
+.tabs-buttons{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.tabs-button{
+    width: 50%;
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    /* color: #17923a; */
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    transition: 500ms;    
+    font-weight: 700
+}
+
+.tabs-button.active{
+    background-color: #19ff593b;
+    color: #17923a;
+}
+
+.indicator{
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    background-color: #81de9b;
+    bottom: 0;
+    transition: 500ms;
+    will-change: left, right;
+}
+
+.indicator.right{
+    margin-left: 50%;  
+}
+.tab{
+    margin: 10px 0;
+    padding: 0 20px;
+    display: none;
+}
+.tab.active{
+    display: block;
+}
+
+.project{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-column-gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(158, 158, 158, 0.6);
+    padding-bottom: 20px;
+}
+
+.project:last-of-type,.review:last-of-type{
+    border-bottom: none;
+    margin-bottom: 0
+}
+
+.project__header{
+    font-weight: 700;
+    font-family: 'Open Sans',sans-serif;
+}
+
+.project__description{
+    font-size: 14px;
+    font-family: 'Open Sans',sans-serif;
+}
+
+.project img{
+    width: 100%;
+}
+
+.review{
+    display: flex;
+    grid-column-gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(158, 158, 158, 0.6);
+    padding-bottom: 20px;
+    font-family: 'Open Sans',sans-serif;
+}
+
+.review img.avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.review div{
+    margin-left: 30px;
+    margin-top: 10px;
+}
