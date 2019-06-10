@@ -1,19 +1,32 @@
 const Employee = require("./employeeModel")
+const { hash } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
 
 const registerEmployeeValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string")
 
 function registerEmployeeFn({ firstname, lastname, nickname, email, password }){
-	const newEmployee = new Employee({
-		firstname: firstname,
-		lastname: lastname,
-		nickname: nickname,
-		email: email,
-		password: password
-	})
 
-	return newEmployee.save()
+	return hash(password, 11)
+			.then(createEmployee)
+			.then(saveEmployee)
+
+	function createEmployee(hashedPassword){
+		const newEmployee = new Employee({
+			firstname: firstname,
+			lastname: lastname,
+			nickname: nickname,
+			email: email,
+			password: hashedPassword
+		})
+
+		return newEmployee
+	}
+
+	function saveEmployee(employee){
+		return employee.save()
+	}
+
 }
 
 function registerEmployeeRoute(req, res, next){
@@ -24,8 +37,8 @@ function registerEmployeeRoute(req, res, next){
 		.then(sendSuccessResponse)
 		.catch(next)
 
-	function sendBadRequestError(errors){
-		throw createError(400, "BAD_REQUEST_BODY", errors.errors)
+	function sendBadRequestError(error){
+		throw createError(400, "BAD_REQUEST_BODY", error.errors)
 	}
 
 	function createSuccessResponse(){
