@@ -1,10 +1,11 @@
+const Artisan = require('../Artisan/artisanModel');
+
 const fns = require('./projectFns');
 
 const { createError, sendSuccess } = require('../../lib/responseHandler');
 const { createValidator } = require("../../lib/validator");
 
 // create validators
-const createProjectValidator = createValidator("title.string, description.string");
 const deleteProjectValidator = createValidator("projectId.string");
 
 class ProjectController {
@@ -14,26 +15,29 @@ class ProjectController {
     createProjectValidator(projectDTO)
       .catch(throwBadRequestError)
       .then(() => fns.createProject(projectDTO))
-      .then(end)
+      .then(appendToArtisan)
+      .then(sendProjectToClient)
       .catch(next);
 
       function throwBadRequestError(error) {
         throw createError(400, 'BAD_REQUEST', error.errors);
       }
 
-      function end(doc) {
+      /**
+       * Adds a reference to the newly created project on the 
+       * Artisan object
+       */
+      function appendToArtisan(projectDoc) {
+        return Artisan.updateOne({ email: req.body.user.email }, {
+          $push: {
+            projects: projectDoc._id
+          }
+        }).then(() => projectDoc);
+      }
+
+      function sendProjectToClient(doc) {
         sendSuccess(res, 201, doc);
       }
-  }
-
-  static getAllProjects(req, res, next) {
-    fns.getAllProjects()
-      .then(end)
-      .catch(next);
-
-    function end(docs) {
-      sendSuccess(res, 200, docs);
-    }
   }
 
   static deleteProject(req, res, next) {
@@ -42,14 +46,14 @@ class ProjectController {
     deleteProjectValidator(projectDTO)
       .catch(throwBadRequestError)
       .then(() => fns.deleteProject(projectDTO.projectID))
-      .then(end)
+      .then(sendSuccessToClient)
       .catch(next);
 
     function throwBadRequestError(error) {
       throw createError(400, 'BAD_REQUEST', error.errors);
     }
 
-    function end() {
+    function sendSuccessToClient() {
       sendSuccess(res, 200);
     }
   }

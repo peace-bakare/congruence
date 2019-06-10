@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 8080;
 app.use(bodyParser.json());
 app.use(cors());
 
-const Employee = require("./resources/Employee");
+const Artisan = require("./resources/Artisan");
 const Project = require("./resources/Project");
 
-app.use("/api/v1/employees", Employee);
+app.use("/api/v1/artisans", Artisan);
 app.use("/api/v1/projects", Project);
 
 //Connect to mongodb
