@@ -13,6 +13,6 @@ exports.sendError = function sendError(res, status, error) {
   res.status(status)
     .json({
       status: status,
-      error: error
+      error: error.message
     });
 };

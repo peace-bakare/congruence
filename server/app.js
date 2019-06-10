@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
+const { sendError } = require('./lib/responseHandler');
+ 
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -17,6 +20,10 @@ mongoose.connect("mongodb+srv://Wisdom:DShX5RERA6OTTG0O@cluster0-zh4ss.mongodb.n
 })
 .then(() => { console.log("Connected to online db") })
 .catch(err => { console.log("Error connection to online db" , err)});
+
+app.use((error, req, res, next) => {
+  sendError(res, error.status || 500, error);
+});
 
 
 app.listen(PORT, () => {
