@@ -3,8 +3,8 @@ const Media = require('../Media/mediaModel');
 
 const projectSchema = new mongoose.Schema({
   title: String,
-  description: String
-  // media: [Media]
+  description: String,
+  media: [{ ref: String }]
 });
 
 projectSchema.statics.fetchAll = function fetchAllProjects(query) {
