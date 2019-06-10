@@ -32,18 +32,12 @@ function getAllArtisanProjectsFn({ artisanId }){
 function getAllArtisanProjectsRoute(req, res, next){
   getAllArtisanProjectsValidator(req.params)
     .catch(sendBadRequestError)
-    .then(() => registerArtisanFn(req.params))
+    .then(() => getAllArtisanProjectsFn(req.params))
     .then(sendSuccessResponse)
     .catch(next);
 
   function sendBadRequestError(error){
     throw createError(400, "BAD_REQUEST_BODY", error.errors)
-  }
-
-  function createSuccessResponse(){
-    return {
-      message: "Artisan registered successfully"
-    }
   }
 
   function sendSuccessResponse(projects){

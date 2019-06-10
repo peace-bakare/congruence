@@ -11,6 +11,7 @@ function searchArtisanFn({ craft }){
 	function filterArtisan(artisans){
 		return artisans.map(artisan => {
 			let modifiedArtisan = {
+				ref: artisan.ref,
 				firstname: artisan.firstname,
 				lastname: artisan.lastname,
 				nickname: artisan.nickname,
