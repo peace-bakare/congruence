@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8080;
 app.use(bodyParser.json());
 app.use(cors());
 
-const Employee = require("./resources/Employee");
+const Employee = require("./resources/Artisan");
 const Project = require("./resources/Project");
 
 app.use("/api/v1/employees", Employee);

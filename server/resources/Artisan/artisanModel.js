@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const employeeSchema = mongoose.Schema({
+const artisanSchema = mongoose.Schema({
 	firstname: { type: String, required: true },
 	lastname: { type: String, required: true },
 	nickname: { type: String, required: true },
@@ -11,6 +11,6 @@ const employeeSchema = mongoose.Schema({
 	//TODO Add projects
 });
 
-const employeeModel = mongoose.model("Employee", employeeSchema);
+const artisanModel = mongoose.model("Employee", artisanSchema);
 
-module.exports = employeeModel;
+module.exports = artisanModel;
