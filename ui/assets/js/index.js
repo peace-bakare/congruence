@@ -51,3 +51,10 @@ document.querySelectorAll('.toggle').forEach(e => {
         },500)
     })
 })
+
+document.querySelectorAll('form').forEach(e => {
+    e.addEventListener('submit',(e) => {
+        e.preventDefault();
+        location.href = './pages/dashboard.html'
+    })
+})
