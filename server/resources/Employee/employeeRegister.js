@@ -3,13 +3,35 @@ const { hash } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
 
-const registerEmployeeValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string")
+const registerEmployeeValidator = createValidator("firstname.string, lastname.string, nickname.string, email.string, password.string, craft.string")
 
-function registerEmployeeFn({ firstname, lastname, nickname, email, password }){
+function registerEmployeeFn({ firstname, lastname, nickname, email, password, craft }){
 
-	return hash(password, 11)
+	return checkIfEmailExists()
+			.then(checkIfNicknameExists)
+			.then(() => hash(password, 11))
 			.then(createEmployee)
 			.then(saveEmployee)
+
+	function checkIfNicknameExists(){
+		return Employee.findOne({ nickname: nickname })
+				.then(handleExists)
+
+		function handleExists(employee){
+			if(employee)
+				throw createError(403, "NICK_NAME_EXISTS")
+		}
+	}
+
+	function checkIfEmailExists(){
+		return Employee.findOne({ email: email })
+				.then(handleExists)
+
+		function handleExists(employee){
+			if(employee)
+				throw createError(403, "EMAIL_EXISTS")
+		}
+	}
 
 	function createEmployee(hashedPassword){
 		const newEmployee = new Employee({
@@ -17,7 +39,8 @@ function registerEmployeeFn({ firstname, lastname, nickname, email, password }){
 			lastname: lastname,
 			nickname: nickname,
 			email: email,
-			password: hashedPassword
+			password: hashedPassword,
+			craft: craft
 		})
 
 		return newEmployee
@@ -43,7 +66,7 @@ function registerEmployeeRoute(req, res, next){
 
 	function createSuccessResponse(){
 		return {
-			message: "User registered successfully"
+			message: "Employee registered successfully"
 		}
 	}
 
