@@ -5,6 +5,7 @@ const Project = require('./projectModel');
 exports.createProject = function createProject(projectDTO) {
   const project = new Project(projectDTO);
   project.ref = uuidv1();
+  project.ref = project.ref.split('-').shift();
 
   return project.save();
 };

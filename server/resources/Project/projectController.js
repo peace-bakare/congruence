@@ -13,7 +13,7 @@ class ProjectController {
 
     createProjectValidator(projectDTO)
       .catch(throwBadRequestError)
-      .then(fns.createProject)
+      .then(() => fns.createProject(projectDTO))
       .then(end)
       .catch(next);
 
@@ -41,7 +41,7 @@ class ProjectController {
 
     deleteProjectValidator(projectDTO)
       .catch(throwBadRequestError)
-      .then(fns.deleteProject(projectDTO.projectID))
+      .then(() => fns.deleteProject(projectDTO.projectID))
       .then(end)
       .catch(next);
 
