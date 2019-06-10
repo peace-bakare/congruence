@@ -3,7 +3,7 @@ const Project = require('./projectModel');
 
 const { sendError, sendResponse } = require('../../lib/responseHandler');
 
-class Project {
+class ProjectController {
   static createProject(req, res, next) {
     const projectDTO = req.body;
 
@@ -30,3 +30,5 @@ class Project {
     }
   }
 }
+
+module.exports = ProjectController;
