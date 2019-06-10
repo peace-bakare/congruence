@@ -20,4 +20,3 @@ exports.sendError = function sendError(res, status, error) {
         errors: error
       })
 };
-
