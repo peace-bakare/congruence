@@ -1,4 +1,6 @@
 const Employee = require("./employeeModel")
+const jwt = require("jsonwebtoken")
+const { SECRET_KEY } = require("../../config")
 const { compare } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
@@ -9,6 +11,7 @@ function loginEmployeeFn({ email, password }){
 
 	return checkIfEmailExists()
 			.then(checkForCorrectPassword)
+			.then(generateToken)
 
 	function checkIfEmailExists(){
 		return Employee.findOne({ email: email })
@@ -28,7 +31,12 @@ function loginEmployeeFn({ email, password }){
 		function handleCompare(same){
 			if(!same)
 				throw createError(403, "INVALID_USERNAME_PASSWORD")
+			return employee
 		}
+	}
+
+	function generateToken(employee){
+		return jwt.sign({ email: employee.email }, SECRET_KEY, { expiresIn: "7d" })
 	}
 
 } 
@@ -46,9 +54,10 @@ function loginEmployeeRoute(req, res, next){
 		throw createError(400, "BAD_REQUEST_BODY", error.errors)
 	}
 
-	function createSuccessResponse(){
+	function createSuccessResponse(token){
 		return {
-			message: "Employee logged in successfully"
+			message: "Employee logged in successfully",
+			token: token
 		}
 	}
 
