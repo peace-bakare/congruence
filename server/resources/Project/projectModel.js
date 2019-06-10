@@ -5,7 +5,7 @@ const projectSchema = new mongoose.Schema({
   ref: String,
   title: String,
   description: String,
-  media: [{ ref: String }]
+  media: [{ ref: 'Media' }]
 });
 
 projectSchema.statics.fetchAll = function fetchAllProjects(query) {
