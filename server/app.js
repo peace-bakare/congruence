@@ -28,7 +28,7 @@ mongoose.connect("mongodb+srv://Wisdom:DShX5RERA6OTTG0O@cluster0-zh4ss.mongodb.n
 app.use((error, req, res, next) => {
   let code = error.code || 'SERVER_ERROR',
     status = error.status || 500,
-    errors = error.errors || [];
+    errors = error.errors || [error.message];
 
   res.status(status)
     .json({
