@@ -67,7 +67,8 @@ function registerArtisanRoute(req, res, next){
 		throw createError(400, "BAD_REQUEST_BODY", error.errors)
 	}
 
-	function createSuccessResponse(){
+	function createSuccessResponse(artisan){
+		console.log(artisan)
 		return {
 			message: "Artisan registered successfully"
 		}

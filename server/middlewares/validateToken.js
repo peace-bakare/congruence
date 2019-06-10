@@ -4,7 +4,6 @@ const { SECRET_KEY } = require("../config")
 
 //Add promise functionality to token validator
 let { verify } = require("jsonwebtoken")
-verify = promisify(verify)
 
 let validateToken = (req, res, next) => {
 
