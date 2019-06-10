@@ -1,5 +1,6 @@
 const uuidv1 = require("uuid/v1")
 const Artisan = require("./artisanModel")
+const loginArtisanFn = require("./artisanLogin").fn
 const { hash } = require("bcrypt")
 const { createValidator } = require("../../lib/validator")
 const { createError, sendSuccess } = require("../../lib/responseHandler")
@@ -59,6 +60,7 @@ function registerArtisanRoute(req, res, next){
 	registerArtisanValidator(req.body)
 		.catch(sendBadRequestError)
 		.then(() => registerArtisanFn(req.body))
+		.then(() => loginArtisanFn(req.body))
 		.then(createSuccessResponse)
 		.then(sendSuccessResponse)
 		.catch(next)
@@ -67,10 +69,11 @@ function registerArtisanRoute(req, res, next){
 		throw createError(400, "BAD_REQUEST_BODY", error.errors)
 	}
 
-	function createSuccessResponse(artisan){
-		console.log(artisan)
+	function createSuccessResponse(token){
+		console.log(token)
 		return {
-			message: "Artisan registered successfully"
+			message: "Artisan registered and logged in successfully",
+			token: token
 		}
 	}
 
