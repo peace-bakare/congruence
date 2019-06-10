@@ -9,7 +9,8 @@ function registerEmployeeFn({ firstname, lastname, nickname, email, password }){
 		firstname: firstname,
 		lastname: lastname,
 		nickname: nickname,
-		email: email
+		email: email,
+		password: password
 	})
 
 	return newEmployee.save()
